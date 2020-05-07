@@ -31,11 +31,11 @@ public class LetterSideBar extends View {
     /**
      * 普通字母大小
      */
-    private float mSideBarTextSize = 17;
+    private float mNormalTextSize = 17;
     /**
      * 普通字母颜色
      */
-    private int mSideBarTextColor = Color.BLUE;
+    private int mNormalTextColor = Color.BLUE;
     /**
      * 当前触摸的字母
      */
@@ -71,17 +71,17 @@ public class LetterSideBar extends View {
 
         letters = mLetters;
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LetterSideBar);
-        mSideBarTextColor = typedArray.getColor(R.styleable.LetterSideBar_side_bar_text_color, mSideBarTextColor);
-        mSideBarTextSize = typedArray.getDimension(R.styleable.LetterSideBar_side_bar_text_size, sp2px(mSideBarTextSize));
+        mNormalTextColor = typedArray.getColor(R.styleable.LetterSideBar_normalTextColor, mNormalTextColor);
+        mNormalTextSize = typedArray.getDimension(R.styleable.LetterSideBar_normalTextSize, sp2px(mNormalTextSize));
 
-        mHighLightTextColor = typedArray.getColor(R.styleable.LetterSideBar_high_light_text_color, mHighLightTextColor);
-        mHighLightTextSize = typedArray.getDimension(R.styleable.LetterSideBar_high_light_text_size, sp2px(mHighLightTextSize));
+        mHighLightTextColor = typedArray.getColor(R.styleable.LetterSideBar_highLightTextColor, mHighLightTextColor);
+        mHighLightTextSize = typedArray.getDimension(R.styleable.LetterSideBar_highLightTextSize, sp2px(mHighLightTextSize));
         typedArray.recycle();
 
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
-        mPaint.setTextSize(mSideBarTextSize);
-        mPaint.setColor(mSideBarTextColor);
+        mPaint.setTextSize(mNormalTextSize);
+        mPaint.setColor(mNormalTextColor);
 
         mHighLightPaint = new Paint();
         mHighLightPaint.setAntiAlias(true);
