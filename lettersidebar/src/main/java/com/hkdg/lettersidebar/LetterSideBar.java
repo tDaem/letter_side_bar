@@ -1,5 +1,6 @@
 package com.hkdg.lettersidebar;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -39,7 +40,7 @@ public class LetterSideBar extends View {
     /**
      * 当前触摸的字母
      */
-    private String currentTouchLetter;
+    private String currentTouchLetter = "";
     /**
      * 高亮字母画笔
      */
@@ -57,6 +58,7 @@ public class LetterSideBar extends View {
      * 当前触摸文字监听
      */
     private OnTouchingTextListener onTouchingTextListener;
+    private boolean isTouching;
 
     public LetterSideBar(Context context) {
         this(context, null);
@@ -98,8 +100,8 @@ public class LetterSideBar extends View {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         //计算指定宽度 = 左右的padding + 字母的宽度
         int textWidth = 0;
-        for (int i = 0; i < letters.length; i++) {
-            int temp = (int) mPaint.measureText(letters[i]);
+        for (String letter : letters) {
+            int temp = (int) mPaint.measureText(letter);
             if (temp > textWidth)
                 textWidth = temp;
         }
@@ -120,7 +122,7 @@ public class LetterSideBar extends View {
             Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
             int dy = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
             int baseLine = dy + letterCenterY;
-            if (letters[i].equals(currentTouchLetter)) {
+            if (letters[i].equals(currentTouchLetter) && isTouching) {
                 //知道每个字母的中心位置
                 int x = (int) (getWidth() - mHighLightPaint.measureText(letters[i]) + getPaddingLeft() - getPaddingRight()) / 2;
                 canvas.drawText(letters[i], x, baseLine, mHighLightPaint);
@@ -132,11 +134,13 @@ public class LetterSideBar extends View {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
+                isTouching = true;
                 float currentMoveY = event.getY();
                 //处理未触摸到字母
                 if (currentMoveY < getPaddingTop() || currentMoveY > getHeight() - getPaddingBottom())
@@ -145,17 +149,22 @@ public class LetterSideBar extends View {
                 int itemHeight = (getHeight() - getPaddingTop() - getPaddingBottom()) / letters.length;
                 //当前按下字母的索引
                 int currentPosition = (int) ((currentMoveY - getPaddingTop() + getPaddingBottom()) / itemHeight);
-                currentTouchLetter = currentPosition < letters.length ? letters[currentPosition] : null;
+                currentPosition = currentPosition < 0 ? 0 : Math.min(currentPosition, letters.length - 1);
+                currentTouchLetter = letters[currentPosition];
+                if (onTouchingTextListener != null) {
+                    onTouchingTextListener.onTouchingText(currentTouchLetter, isTouching);
+                }
                 invalidate();
                 break;
             case MotionEvent.ACTION_UP:
-                currentTouchLetter = null;
+                isTouching = false;
+                if (onTouchingTextListener != null) {
+                    onTouchingTextListener.onTouchingText(currentTouchLetter, isTouching);
+                }
                 invalidate();
                 break;
         }
-        if (onTouchingTextListener != null) {
-            onTouchingTextListener.onTouchingText(currentTouchLetter);
-        }
+
         return true;
     }
 
@@ -168,7 +177,7 @@ public class LetterSideBar extends View {
     }
 
     public interface OnTouchingTextListener {
-        void onTouchingText(@Nullable String text);
+        void onTouchingText(String text, boolean isTouching);
     }
-    
+
 }
