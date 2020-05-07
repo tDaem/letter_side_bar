@@ -15,10 +15,12 @@ import androidx.annotation.Nullable;
 public class LetterSideBar extends View {
 
     //定义26个字母
-    private static final String[] mLetters = {"A", "B", "C", "D", "E", "F", "G",
+    private static final String[] mLetters = {
+            "A", "B", "C", "D", "E", "F", "G",
             "H", "I", "J", "K", "L", "M", "N",
             "O", "P", "Q", "R", "S", "T",
-            "U", "V", "W", "X", "Y", "Z", "#"};
+            "U", "V", "W", "X", "Y", "Z", "#"
+    };
 
     private String[] letters;
 
