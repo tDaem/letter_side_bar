@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LetterSideBar">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -28,6 +28,10 @@
         android:paddingTop="4dp"
         android:paddingRight="12dp"
         android:paddingBottom="4dp"
+        app:highLightTextTolor="@android:color/holo_red_dark"
+        app:highLightTextSize="21sp"
+        app:normalTextColor="@color/colorPrimary"
+        app:normalTextSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
