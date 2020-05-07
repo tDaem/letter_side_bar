@@ -18,4 +18,4 @@
             }
         });
     ```
-![侧边栏](C:\Users\Daem\Desktop\demo.gif "demo")
+![侧边栏](https://github.com/tDaem/letter_side_bar/blob/master/lettersidebar/src/main/res/drawable/demo.gif "demo")
