@@ -27,10 +27,9 @@
         //String[] letter = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
         //letterSideBar.setLetters(letter);
         //设置正在触摸字母的回调监听
-        letterSideBar.setOnTouchingTextListener((text) -> {
-            if (text == null) {
+        letterSideBar.setOnTouchingTextListener((text,isTouching) -> {
+            if (!isTouching) {
                 textView.setVisibility(View.GONE);
-                textView.setText("");
             } else {
                 textView.setVisibility(View.VISIBLE);
                 textView.setText(text);
