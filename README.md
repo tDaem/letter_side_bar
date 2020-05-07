@@ -5,7 +5,7 @@
         TextView textView = findViewById(R.id.textView);
         LetterSideBar letterSideBar = findViewById(R.id.letterSideBar);
         String[] letter = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
-        //设置letterSideBar要显示的字符
+        //设置letterSideBar要显示的字符，默认26个大写字母加#
         letterSideBar.setLetters(letter);
         //设置正在触摸字母的回调监听
         letterSideBar.setOnTouchingTextListener((text) -> {
@@ -18,3 +18,4 @@
             }
         });
     ```
+![侧边栏](C:\Users\Daem\Desktop\demo.gif "demo")
