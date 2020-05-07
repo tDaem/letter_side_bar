@@ -1,4 +1,24 @@
-# letter_side_bar 安卓侧边字母sidebar
+# letter_side_bar 侧边字母sidebar
+    ```
+        <!-- 布局文件，自定义了四个属性，分别为正常的文字大小、颜色和高亮的文字大小和颜色 -->
+        <com.hkdg.lettersidebar.LetterSideBar
+            android:id="@+id/letterSideBar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingLeft="8dp"
+            android:paddingTop="4dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="4dp"
+            app:highLightTextTolor="@android:color/holo_red_dark"
+            app:highLightTextSize="21sp"
+            app:normalTextColor="@color/colorPrimary"
+            app:normalTextSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </com.hkdg.lettersidebar.LetterSideBar>
+    ```
     ```
         //在布局文件中布局一个TextView和LetterSideBar
         //在onCreate方法中找到对应的view
